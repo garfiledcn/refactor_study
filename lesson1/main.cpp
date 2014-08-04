@@ -11,7 +11,7 @@ int main(int argc, char** argv)
 {
 	string title("gump");
 	string cus("lufei");
-	Movie mov1(title, 10);
+	Movie mov1(title, 0);
 	Rental rent1(mov1, 3);
 	Customer lf(cus);
 
