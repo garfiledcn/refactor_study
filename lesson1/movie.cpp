@@ -53,3 +53,13 @@ double Movie::getCharge(int daysrented)
 	return result;
 	
 }
+
+int Movie::getFrequentRenterPoints(int daysrented)
+{
+	if ((getPriceCode() == Movie::NEW_RELEASE) && 
+			daysrented > 1)
+		return 2;
+	else
+		return 1;
+	
+}

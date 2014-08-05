@@ -18,4 +18,5 @@ public:
     string getTitle()const{return mTitle;}
     void setPriceCode(int pricecode){mPriceCode = pricecode;}
     double getCharge(int daysrented);
+    int getFrequentRenterPoints(int daysrented);
 };
