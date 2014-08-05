@@ -8,7 +8,7 @@ Movie::Movie(string& title, int pricecode)
 	:mTitle(title),
      mPriceCode(pricecode)
 {
-	cout<<"["<<__func__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Movie::Movie(const Movie& other)
