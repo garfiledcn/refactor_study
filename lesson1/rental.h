@@ -15,4 +15,5 @@ public:
     Movie& getMovie() ;
 
     double getCharge();
+    int getFrequentRenterPoints();
 };

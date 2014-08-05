@@ -64,10 +64,7 @@ string Customer::statement()
     vector<Rental>::iterator end = mRentals.end();
 
     while(it != end){
-        frequentRenterPoints ++;
-        if (it->getMovie().getPriceCode() == Movie::NEW_RELEASE && 
-                it->getDaysRented() > 1)
-            frequentRenterPoints ++;
+        frequentRenterPoints += it->getFrequentRenterPoints();
 
         result += "\t";
         result += it->getMovie().getTitle();
