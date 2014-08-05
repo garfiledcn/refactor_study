@@ -1,3 +1,5 @@
+class Price;
+
 class Movie{
 public:
     static const int CHILDRENS = 2;
@@ -6,17 +8,16 @@ public:
 
 private:
     string mTitle;
-    int mPriceCode;
-
+    Price* mPrice;
 public:
     Movie(string& title, int pricecode);
     Movie(const Movie& other);
     ~Movie();
     Movie& operator=(const Movie& other);
 
-    int getPriceCode()const{return mPriceCode;}
+    int getPriceCode()const;
     string getTitle()const{return mTitle;}
-    void setPriceCode(int pricecode){mPriceCode = pricecode;}
+    void setPriceCode(int pricecode);
     double getCharge(int daysrented);
     int getFrequentRenterPoints(int daysrented);
 };

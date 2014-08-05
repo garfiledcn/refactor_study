@@ -1,21 +1,25 @@
 #include <iostream>
 #include <string>
+#include <assert.h>
 using namespace std;
 
 #include "movie.h"
+#include "price.h"
 
 Movie::Movie(string& title, int pricecode)
 	:mTitle(title),
-     mPriceCode(pricecode)
+	 mPrice(NULL)
 {
 	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
+	setPriceCode(pricecode);
 }
 
 Movie::Movie(const Movie& other)
 	:mTitle(other.mTitle),
-	 mPriceCode(other.mPriceCode)
+	 mPrice(NULL)
 {
 	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
+	setPriceCode(other.getPriceCode());
 }
 
 Movie::~Movie()
@@ -26,7 +30,7 @@ Movie::~Movie()
 Movie& Movie::operator=(const Movie& other)
 {
 	mTitle = other.mTitle;
-	mPriceCode = other.mPriceCode;
+	setPriceCode(other.getPriceCode());
 }
 
 double Movie::getCharge(int daysrented)
@@ -62,4 +66,32 @@ int Movie::getFrequentRenterPoints(int daysrented)
 	else
 		return 1;
 	
+}
+
+void Movie::setPriceCode(int pricecode)
+{
+	if (mPrice){
+		delete mPrice;
+		mPrice = NULL;
+	}
+	switch (pricecode) {
+		case REGULAR:
+			mPrice = new RegularPrice();
+			break;
+		case CHILDRENS:
+			mPrice = new ChildrensPrice();
+			break;
+		case NEW_RELEASE:
+			mPrice = new NewReleasePrice();
+			break;
+		default:
+			assert(false);
+	}
+}
+
+int Movie::getPriceCode() const 
+{
+    assert (mPrice);
+
+    return mPrice->getPriceCode();
 }
