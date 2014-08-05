@@ -6,10 +6,12 @@ CFLAGS=-g
 
 SRC=movie.cpp \
 	rental.cpp \
-	customer.cpp
+	customer.cpp \
+	price.cpp
 OBJ=movie.o \
 	rental.o \
-	customer.o
+	customer.o \
+	price.o
 
 INCLUDE=.
 

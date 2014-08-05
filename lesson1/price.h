@@ -5,6 +5,8 @@ public:
     Price(){};
     virtual int getPriceCode() = 0;
     ~Price(){}
+	virtual double getCharge(int) = 0;
+    virtual int getFrequentRenterPoints(int daysrented) {return 1;}
 private:
     Price(Price&);
     Price& operator=(const Price&);
@@ -18,6 +20,7 @@ public:
         return Movie::CHILDRENS;
     }
     ~ChildrensPrice(){}
+	virtual double getCharge(int);
 private:
     ChildrensPrice(ChildrensPrice&);
     ChildrensPrice& operator=(const ChildrensPrice&);
@@ -30,7 +33,9 @@ public:
     virtual int getPriceCode(){
         return Movie::NEW_RELEASE;
     }
+	virtual double getCharge(int);
     ~NewReleasePrice(){}
+    virtual int getFrequentRenterPoints(int daysrented) ;
 private:
     NewReleasePrice(NewReleasePrice&);
     NewReleasePrice& operator=(const NewReleasePrice&);
@@ -43,6 +48,7 @@ public:
     virtual int getPriceCode() {
         return Movie::REGULAR;
     }
+	virtual double getCharge(int);
     ~RegularPrice(){}
 private:
     RegularPrice(RegularPrice&);

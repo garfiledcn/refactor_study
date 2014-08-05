@@ -35,37 +35,14 @@ Movie& Movie::operator=(const Movie& other)
 
 double Movie::getCharge(int daysrented)
 {
-	double result = 0.0;
-	switch(getPriceCode()) {
-		case REGULAR:
-			result += 2;
-			if (daysrented > 2)
-				result += (daysrented - 2) * 1.5;
-			break;
-		case NEW_RELEASE:
-			result += daysrented * 3;
-			break;
-		case CHILDRENS:
-			result += 1.5;
-			if (daysrented > 3)
-				result += (daysrented - 3) * 1.5;
-			break;
-		default:
-			cout<<"should never reached"<<endl;
-			break;
-	}
-	return result;
-	
+	assert (mPrice);
+	return mPrice->getCharge(daysrented);
 }
 
 int Movie::getFrequentRenterPoints(int daysrented)
 {
-	if ((getPriceCode() == Movie::NEW_RELEASE) && 
-			daysrented > 1)
-		return 2;
-	else
-		return 1;
-	
+	assert (mPrice);
+    return mPrice->getFrequentRenterPoints(daysrented);
 }
 
 void Movie::setPriceCode(int pricecode)
