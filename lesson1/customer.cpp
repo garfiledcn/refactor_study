@@ -50,11 +50,37 @@ string do_fraction(double value, int decplaces=3)
     return str;
 }
 
+double Customer::getTotalCharge()
+{
+    double result = 0;
+    vector<Rental>::iterator it = mRentals.begin();
+    vector<Rental>::iterator end = mRentals.end();
+    
+    while(it != end){
+        result += it->getCharge();
+        ++it;
+    }
+
+    return result;
+}
+
+int Customer::getTotalFrequentPoint()
+{
+    int result = 0;
+    vector<Rental>::iterator it = mRentals.begin();
+    vector<Rental>::iterator end = mRentals.end();
+
+    while(it != end) {
+        result += it->getFrequentRenterPoints();
+        ++it;
+    }
+
+    return result;
+}
+
 
 string Customer::statement()
 {
-    double totalAmount = 0;
-    int frequentRenterPoints = 0;
     string result("Rental Record for ");
 
     result += getName();
@@ -64,24 +90,21 @@ string Customer::statement()
     vector<Rental>::iterator end = mRentals.end();
 
     while(it != end){
-        frequentRenterPoints += it->getFrequentRenterPoints();
-
         result += "\t";
         result += it->getMovie().getTitle();
         result += "\t";
         result += do_fraction(it->getCharge());
         result += "\n";
         
-        totalAmount += it->getCharge();
         ++it;
     }
     
     result += "Amount owed is:";
-    result += do_fraction(totalAmount);
+    result += do_fraction(getTotalCharge());
     result += "\n";
 
     result += "You earned:";
-    result += do_fraction(static_cast<double>(frequentRenterPoints));
+    result += do_fraction(static_cast<double>(getTotalFrequentPoint()));
     result += " frequent renter points";
     return result;
 }

@@ -16,4 +16,7 @@ public:
     void addRental(Rental& arg) { mRentals.push_back(arg); }
     
     string statement();
+
+	double getTotalCharge();
+	int getTotalFrequentPoint();
 };
