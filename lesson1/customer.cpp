@@ -64,9 +64,6 @@ string Customer::statement()
     vector<Rental>::iterator end = mRentals.end();
 
     while(it != end){
-        double thisAmount = 0;
-        thisAmount = it->getCharge();
-		
         frequentRenterPoints ++;
         if (it->getMovie().getPriceCode() == Movie::NEW_RELEASE && 
                 it->getDaysRented() > 1)
@@ -75,10 +72,10 @@ string Customer::statement()
         result += "\t";
         result += it->getMovie().getTitle();
         result += "\t";
-        result += do_fraction(thisAmount);
+        result += do_fraction(it->getCharge());
         result += "\n";
         
-        totalAmount += thisAmount;
+        totalAmount += it->getCharge();
         ++it;
     }
     
