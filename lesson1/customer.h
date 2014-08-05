@@ -6,6 +6,7 @@ private:
     string mName;
     vector<Rental> mRentals;
     Customer();
+    double amountFor(Rental&);
 public:
     Customer(string& name);
     ~Customer();
@@ -14,6 +15,6 @@ public:
 
     string getName(){return mName;}
     void addRental(Rental& arg) { mRentals.push_back(arg); }
-
+    
     string statement();
 };

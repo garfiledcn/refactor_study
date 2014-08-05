@@ -8,7 +8,7 @@ using namespace std;
 #include "customer.h"
 
 typedef struct movie_info {
-    char* name;
+    const char* name;
     int   type;
 } MovieInfo;
 

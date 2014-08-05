@@ -12,18 +12,18 @@ using namespace std;
 Customer::Customer(string& name)
 	: mName(name)
 {
-	cout<<"["<<__func__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Customer::~Customer()
 {
-	cout<<"["<<__func__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Customer::Customer(Customer& other)
 	:mName(other.mName)
 {
-	cout<<"["<<__func__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Customer& Customer::operator=(Customer& other)
@@ -50,6 +50,30 @@ string do_fraction(double value, int decplaces=3)
     return str;
 }
 
+double Customer::amountFor(Rental& each)
+{
+	double thisAmount = 0.0;
+	switch(each.getMovie().getPriceCode()) {
+		case Movie::REGULAR:
+			thisAmount += 2;
+			if (each.getDaysRented() > 2)
+				thisAmount += (each.getDaysRented() - 2) * 1.5;
+			break;
+		case Movie::NEW_RELEASE:
+			thisAmount += each.getDaysRented() * 3;
+			break;
+		case Movie::CHILDRENS:
+			thisAmount += 1.5;
+			if (each.getDaysRented() > 3)
+				thisAmount += (each.getDaysRented() - 3) * 1.5;
+			break;
+		default:
+			cout<<"should never reached"<<endl;
+			break;
+	}
+	return thisAmount;
+}
+
 string Customer::statement()
 {
     double totalAmount = 0;
@@ -64,26 +88,8 @@ string Customer::statement()
 
     while(it != end){
         double thisAmount = 0;
-        
-        switch(it->getMovie().getPriceCode()) {
-            case Movie::REGULAR:
-                thisAmount += 2;
-                if (it->getDaysRented() > 2)
-                    thisAmount += (it->getDaysRented() - 2) * 1.5;
-                break;
-            case Movie::NEW_RELEASE:
-                thisAmount += it->getDaysRented() * 3;
-                break;
-            case Movie::CHILDRENS:
-                thisAmount += 1.5;
-                if (it->getDaysRented() > 3)
-                    thisAmount += (it->getDaysRented() - 3) * 1.5;
-                break;
-            default:
-                cout<<"should never reached"<<endl;
-                break;
-        }
-
+        thisAmount = amountFor(*it);
+		
         frequentRenterPoints ++;
         if (it->getMovie().getPriceCode() == Movie::NEW_RELEASE && 
                 it->getDaysRented() > 1)

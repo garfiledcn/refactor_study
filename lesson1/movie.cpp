@@ -8,19 +8,19 @@ Movie::Movie(string& title, int pricecode)
 	:mTitle(title),
      mPriceCode(pricecode)
 {
-	cout<<"["<<__FUNCTION__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Movie::Movie(const Movie& other)
 	:mTitle(other.mTitle),
 	 mPriceCode(other.mPriceCode)
 {
-	cout<<"["<<__func__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Movie::~Movie()
 {
-	cout<<"["<<__func__<<", "<<__LINE__<<"]"<<endl;
+	cout<<"["<<__PRETTY_FUNCTION__<<", "<<__LINE__<<"]"<<endl;
 }
 
 Movie& Movie::operator=(const Movie& other)
