@@ -50,29 +50,6 @@ string do_fraction(double value, int decplaces=3)
     return str;
 }
 
-double Customer::amountFor(Rental& aRental)
-{
-	double result = 0.0;
-	switch(aRental.getMovie().getPriceCode()) {
-		case Movie::REGULAR:
-			result += 2;
-			if (aRental.getDaysRented() > 2)
-				result += (aRental.getDaysRented() - 2) * 1.5;
-			break;
-		case Movie::NEW_RELEASE:
-			result += aRental.getDaysRented() * 3;
-			break;
-		case Movie::CHILDRENS:
-			result += 1.5;
-			if (aRental.getDaysRented() > 3)
-				result += (aRental.getDaysRented() - 3) * 1.5;
-			break;
-		default:
-			cout<<"should never reached"<<endl;
-			break;
-	}
-	return result;
-}
 
 string Customer::statement()
 {
@@ -88,7 +65,7 @@ string Customer::statement()
 
     while(it != end){
         double thisAmount = 0;
-        thisAmount = amountFor(*it);
+        thisAmount = it->getCharge();
 		
         frequentRenterPoints ++;
         if (it->getMovie().getPriceCode() == Movie::NEW_RELEASE && 

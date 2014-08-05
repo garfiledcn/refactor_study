@@ -6,7 +6,6 @@ private:
     string mName;
     vector<Rental> mRentals;
     Customer();
-    double amountFor(Rental&);
 public:
     Customer(string& name);
     ~Customer();

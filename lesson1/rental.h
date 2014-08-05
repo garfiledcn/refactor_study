@@ -13,4 +13,6 @@ public:
 
     int getDaysRented() const {return mDaysRented;}
     Movie& getMovie() ;
+
+    double getCharge();
 };
